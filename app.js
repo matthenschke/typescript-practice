@@ -1,34 +1,19 @@
-// const person: {
-//   name: string;
-//   age: number;
-//   hobbies: string[];
-//   role: [number, string]; // tuple
-// } = {
-// const ADMIN = 0;
-// const READ_ONLY = 1;
-// const AUTHOR = 2;
-// enum
-var Role;
-(function (Role) {
-    Role[Role["ADMIN"] = 5] = "ADMIN";
-    Role["READ_ONLY"] = "READ_ONLY";
-    Role[Role["AUTHOR"] = 1] = "AUTHOR"; // 2
-})(Role || (Role = {}));
-var person = {
-    name: "Matt",
-    age: 21,
-    hobbies: ["coding", "sports"],
-    role: Role.AUTHOR
-};
-// person.role.push("admin"); // push is allowed for tuples
-var favoriteActivities;
-favoriteActivities = ["sports", "cooking"];
-console.log(person.name);
-console.log(person.role);
-for (var _i = 0, _a = person.hobbies; _i < _a.length; _i++) {
-    var hobby = _a[_i];
-    console.log(hobby.toUpperCase());
+function combine(input1, // union types allow parameters to be diff types
+input2, resultConversion // literal type
+) {
+    var result;
+    if ((typeof input1 === "number" && typeof input2 === "number") ||
+        resultConversion === "as-number") {
+        result = +input1 + +input2; // +string_var converts to number
+    }
+    else {
+        result = input1.toString() + input2.toString();
+    }
+    return result;
 }
-if (person.role === Role.AUTHOR) {
-    console.log("author");
-}
+var combinedAges = combine(30, 26, "as-number");
+console.log(combinedAges);
+var combinedStringAges = combine("30", "26", "as-number");
+console.log(combinedStringAges);
+var combinedNames = combine("Jeff", "Matt", "as-text");
+console.log(combinedNames);
